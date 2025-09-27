@@ -1,0 +1,27 @@
+// creating database 
+
+CREATE DATABASE Insurance;
+
+// creating tables 
+
+CREATE TABLE users(userID int PRIMARY KEY,Name VARCHAR(250), Role VARCHAR(250), Email VARCHAR(250), PasswordHash VARCHAR(250));
+
+CREATE TABLE Customer(CustomerID INT PRIMARY KEY,FullName VARCHAR(250), Contact VARCHAR(250), Type VARCHAR(250));
+
+CREATE TABLE Asset( AssetID INT PRIMARY KEY, Type VARCHAR(250), Value int, RegistrationNo int, Description varchar(250), CustomerID int, FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID));
+
+CREATE TABLE Policy(PolicyID int PRIMARY KEY,PolicyNo varchar(100) , StartDate varchar(100), EndDate varchar(100), PremiumAmount varchar(100), Status varchar(250), CustomerID int ,FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID), AssetID INT, FOREIGN KEY(AssetID) REFERENCES Asset(AssetID));
+
+CREATE TABLE Claim(ClaimID int PRIMARY KEY, ClaimDate varchar(250), ClaimAmount  varchar(100), Status varchar(250), PolicyID int,FOREIGN KEY(PolicyID) REFERENCES Policy(PolicyID));
+
+CREATE TABLE ClaimAssessment(AssessmentId int PRIMARY KEY, ReportDate varchar(250), AssessedLoss varchar(100), Notes varchar(500), ClaimID  int,FOREIGN key(ClaimID) REFERENCES Claim(ClaimID));
+
+
+// all tables have auto increment I did it manually
+
+// inserting values 
+
+INSERT INTO users Values(1,"manager","manager","manager@insurance.ac.rw","12");
+INSERT INTO users Values(2,"reception","reception","reception@insurance.ac.rw","12");
+INSERT INTO users Values(3,"consultant","consultant","consultant@insurance.ac.rw","12");
+
